@@ -14,34 +14,33 @@
         <h1 class="logo">.todolist</h1>
     </header>
     <main>
-        <div class="form">
+        <ul class="form">
             <form action="000.php" method="post">
-                <div class="tsk">
-
+                <li class="tsk">
                     <label for="tskname" class="tskname">タスク：<input type="text" id="tskname" class="tskname"></label>
-                </div>
+                </li>
                 
-                <div class="priority-radio">
-                    <label>
+                <li class="priority-radio">                    
                         優先度：
-                        <label><input id="priority" type="radio" name="priority">緊急</label>
-                        <label><input id="priority" type="radio" name="priority">通常</label>
-                        <label><input id="priority" type="radio" name="priority">不急</label>
-                    </label>
-                </div>
+                        <input id="priority1" type="radio" name="priority"><label class="radiobtn" for="priority1">緊急</label>
+                        <input id="priority2" type="radio" name="priority"><label class="radiobtn" for="priority2">通常</label>
+                        <input id="priority3" type="radio" name="priority"><label class="radiobtn" for="priority3">不急</label>
+                </li>
 
-                <div class="alert-date">
+                <li class="alert-date">
                     <label for="alert">お知らせ時間：<input type="datetime-local" id="alert"></label>
-                </div>
+                </li>
 
-                <div class="submit">
-                    <input type="submit" value="リストに保存する">
-                </div>
-                <div class="reset">
-                    <input type="reset" value="リセット">
+                <div class="resetsubmit">
+                    <div class="submit">
+                        <input type="submit" value="リストに保存する">
+                    </div>
+                    <div class="reset">
+                        <input type="reset" value="リセット">
+                    </div>
                 </div>
             </form>
-        </div>
+        </ul>
     </main>
     <footer>
 
