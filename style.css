@@ -27,33 +27,73 @@ input[type="radio"]{
     height: 500px;
     width: 500px;
     margin-top: 2.5%;
+    margin-left: 25%;
     border-radius: 30%;
     background-color: #1DA1F2;
     text-align: center;
-}
-input[type="radio"]:checked + label{
-    background-color: #204;
 }
 input{
     border-radius: 10%;
     margin-top: 12.5%;
 }
+.tskname{
+    height: 25px;
+    font-size: 25px;
+}
+.alert{
+    height: 25px;
+    font-size: 25px;
+}
 input[type="radio"]:checked + label {
     background: #31A9EE;
     color: #fff;
 }
+input[type="radio"]:hover + label{
+    background: #31A9EE;
+    color: #fff;
+}
 .priority-radio{
+    display: flex;
+    margin-left: 12.5%;
     margin-top: 12.5%;
+    font-size: 25px;
+    height: 25px;
+}
+.radiobtn-group{
+    margin-left: 30px;
+}
+.alert-date{
+    display: flex;
+    margin-left: -2.5%;
+    margin-top: 5.5%;
+}
+.alert-date input{
+    height: 35%;
+    margin-left: 30px;
 }
 .resetsubmit{
+    margin-right: 20px;
     margin-top: 15%;
     display: flex;
     justify-content: space-around;
 }
 input[type="submit"]{
-    margin-top: 15%;
+    height: 60px;
+    width: 125px;
+    font-size: 12.5px;
+    font-weight: bold;
+}
+input[type="submit"]:hover{
+    background-color: #31A9EE;
+    color: #fff;
 }
 input[type="reset"]{
-    margin-top: 26%;
-    margin-right: ;
+    height: 60px;
+    margin-top: 15px;
+    width: 125px;
+    font-weight: bold;
+}
+input[type="reset"]:hover{
+    background-color: #f55a42;
+    color: #fff;
 }
