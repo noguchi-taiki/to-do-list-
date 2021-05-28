@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <!-- ブートスラップ（グリッドシステムのみ）の取り込み -->
+    <link rel="stylesheet" href="bootstrap-grid.css.map">
+    <title></title>
+</head>
+<body>
+    <header>
+        <h1 class="logo">.todolist</h1>
+    </header>
+    <main>
+        <ul class="form">
+            <form action="form.php" method="post">
+                <li class="tsk">
+                    <label for="tskname" class="tskname">タスク：<input type="text" name="tskname" id="tskname" class="tskname"></label>
+                </li>
+                
+                <li class="priority-radio">                    
+                        優先度：
+                        <div class="radiobtn-group">
+                            <input id="priority1" type="radio" name="priority" value="緊急"><label class="radiobtn" for="priority1">緊急</label>
+                            <input id="priority2" type="radio" name="priority" value="通常"><label class="radiobtn" for="priority2">通常</label>
+                            <input id="priority3" type="radio" name="priority" value="不急"><label class="radiobtn" for="priority3">不急</label>
+                        </div>
+                </li>
+
+                <li class="alert-date">
+                    <label for="alert">お知らせ時間：<input type="datetime-local" id="alert"></label>
+                </li>
+
+                <div class="resetsubmit">
+                    <div class="submit">
+                        <input type="submit" value="リストに保存する">
+                    </div>
+                    <div class="reset">
+                        <input type="reset" value="リセット">
+                    </div>
+                </div>
+            </form>
+
+
+            <form action="index.php" method="POST">
+                <?php echo $_POST[tskname] ?><br>
+                <?php echo $_POST[] ?><br>
+                <?php $value = $_POST["priority"]; 
+                if ($value){
+                    echo "優先度は". $value . "です"。;
+                }
+                ?>
+                <input type="submit" value="リストに保存する">
+                <input type="reset" value="リセット">
+            </form>
+        </ul>
+    </main>
+    <footer>
+
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

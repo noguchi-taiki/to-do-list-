@@ -15,17 +15,17 @@
     </header>
     <main>
         <ul class="form">
-            <form action="000.php" method="post">
+            <form action="form.php" method="post">
                 <li class="tsk">
-                    <label for="tskname" class="tskname">タスク：<input type="text" id="tskname" class="tskname"></label>
+                    <label for="tskname" class="tskname">タスク：<input type="text" name="tskname" id="tskname" class="tskname"></label>
                 </li>
                 
                 <li class="priority-radio">                    
                         優先度：
                         <div class="radiobtn-group">
-                            <input id="priority1" type="radio" name="priority"><label class="radiobtn" for="priority1">緊急</label>
-                            <input id="priority2" type="radio" name="priority"><label class="radiobtn" for="priority2">通常</label>
-                            <input id="priority3" type="radio" name="priority"><label class="radiobtn" for="priority3">不急</label>
+                            <input id="priority1" type="radio" name="priority" value="緊急"><label class="radiobtn" for="priority1">緊急</label>
+                            <input id="priority2" type="radio" name="priority" value="通常"><label class="radiobtn" for="priority2">通常</label>
+                            <input id="priority3" type="radio" name="priority" value="不急"><label class="radiobtn" for="priority3">不急</label>
                         </div>
                 </li>
 
@@ -41,6 +41,19 @@
                         <input type="reset" value="リセット">
                     </div>
                 </div>
+            </form>
+
+
+            <form action="index.php" method="POST">
+                <?php echo $_POST[tskname] ?><br>
+                <?php echo $_POST[] ?><br>
+                <?php $value = $_POST["priority"]; 
+                if ($value){
+                    echo "優先度は". $value . "です"。;
+                }
+                ?>
+                <input type="submit" value="リストに保存する">
+                <input type="reset" value="リセット">
             </form>
         </ul>
     </main>
