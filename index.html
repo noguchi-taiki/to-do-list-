@@ -6,68 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <!-- ブートスラップ（グリッドシステムのみ）の取り込み -->
-    <link rel="stylesheet" href="bootstrap-grid.css">
+    <link rel="stylesheet" href="bootstrap-grid.css.map">
     <title></title>
 </head>
-<?php
-// エラーを出力する
-ini_set('display_errors', "On");
-?>
 <body>
     <header>
         <h1 class="logo">.todolist</h1>
     </header>
     <main>
-        <?php if($_POST) {?>
-            <ul class="form">
-            <form action="./index2.php" method="post">
-                <li class="tsk">
-                    タスク：<input type="text" name="tskname" id="tskname" class="tskname" value="<?php echo $_POST["tskname"] ?>">
-                </li>
-                
-                <li class="priority-radio">     
-                        <?php
-                        if(isset($_POST['priority'])) {
-                            echo '優先度：' .  $_POST['priority'] ;
-                        } else {
-                            echo '優先度が選択されていません。<br>';
-                        }
-                        ?>
-                </li>
-
-                <li class="alert-date">
-                    <label for="alert">お知らせ時間：<input type="datetime-local" id="alert" value="<?php echo $_POST["alert"]?>"></label>
-                </li>
-
-                <div class="resetsubmit">
-                    <div class="submit">
-                        <input type="submit" value="確定">
-                    </div>
-                    <div class="reset">
-                        <input type="reset" value="戻る">
-                    </div>
-                </div>
-            </form>
-
-
-            </ul>
-        
-        <?php } else { ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
         <ul class="form">
-            <form action="./index.php" method="post">
+            <form action="form.php" method="post">
                 <li class="tsk">
                     <label for="tskname" class="tskname">タスク：<input type="text" name="tskname" id="tskname" class="tskname"></label>
                 </li>
@@ -82,7 +30,7 @@ ini_set('display_errors', "On");
                 </li>
 
                 <li class="alert-date">
-                    <label for="alert">お知らせ時間：<input type="datetime-local" id="alert" name="alert"></label>
+                    <label for="alert">お知らせ時間：<input type="datetime-local" id="alert"></label>
                 </li>
 
                 <div class="resetsubmit">
@@ -94,14 +42,21 @@ ini_set('display_errors', "On");
                     </div>
                 </div>
             </form>
+
+
+            <form action="index.php" method="POST">
+                <?php echo $_POST[tskname] ?><br>
+                <?php echo $_POST[] ?><br>
+                <?php $value = $_POST["priority"]; 
+                if ($value){
+                    echo "優先度は". $value . "です"。;
+                }
+                ?>
+                <input type="submit" value="リストに保存する">
+                <input type="reset" value="リセット">
+            </form>
         </ul>
-
-        <?php } ?>
     </main>
-
-        
-        
-    
     <footer>
 
     </footer>
