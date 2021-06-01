@@ -1,3 +1,13 @@
+<?php
+  $mode = 'input';
+  if(  $_POST['back'] ){
+
+  } else if( isset($_POST['confirm']) && $_POST['confirm'] ){
+    $mode = 'confirm';
+  } else if( isset($_POST['send']) && $_POST['send'] ){
+    $mode = 'send';
+  }
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,63 +19,14 @@
     <link rel="stylesheet" href="bootstrap-grid.css">
     <title></title>
 </head>
-<?php
-// エラーを出力する
-ini_set('display_errors', "On");
-?>
+
+
+
 <body>
     <header>
         <h1 class="logo">.todolist</h1>
     </header>
-    <main>
-        <?php if($_POST) {?>
-            <ul class="form">
-            <form action="./index2.php" method="post">
-                <li class="tsk">
-                    タスク：<input type="text" name="tskname" id="tskname" class="tskname" value="<?php echo $_POST["tskname"] ?>">
-                </li>
-                
-                <li class="priority-radio">     
-                        <?php
-                        if(isset($_POST['priority'])) {
-                            echo '優先度：' .  $_POST['priority'] ;
-                        } else {
-                            echo '優先度が選択されていません。<br>';
-                        }
-                        ?>
-                </li>
-
-                <li class="alert-date">
-                    <label for="alert">お知らせ時間：<input type="datetime-local" id="alert" value="<?php echo $_POST["alert"]?>"></label>
-                </li>
-
-                <div class="resetsubmit">
-                    <div class="submit">
-                        <input type="submit" value="確定">
-                    </div>
-                    <div class="reset">
-                        <input type="reset" value="戻る">
-                    </div>
-                </div>
-            </form>
-
-
-            </ul>
-        
-        <?php } else { ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <?php if( $mode == 'input') { ?>
         <ul class="form">
             <form action="./index.php" method="post">
                 <li class="tsk">
@@ -87,7 +48,7 @@ ini_set('display_errors', "On");
 
                 <div class="resetsubmit">
                     <div class="submit">
-                        <input type="submit" value="リストに保存する">
+                        <input type="submit" value="リストに保存する" name="confirm">
                     </div>
                     <div class="reset">
                         <input type="reset" value="リセット">
@@ -95,16 +56,38 @@ ini_set('display_errors', "On");
                 </div>
             </form>
         </ul>
+    <?php } else if($mode == 'confirm'){ ?>
+        <ul class="form">
+            <form action="./index2.php" method="post">
+                <li class="tsk">
+                    タスク：<input type="text" name="tskname" id="tskname" class="tskname" value="<?php echo $_POST["tskname"] ?>">
+                </li>
+                
+                <li class="priority-radio">                    
+                        優先度：
+                        <?php
+                        echo $_POST["priority"];
+                        ?>
+                </li>
 
-        <?php } ?>
-    </main>
+                <li class="alert-date">
+                    <label for="alert">お知らせ時間：<input type="datetime-local" id="alert" value="<?php echo $_POST["alert"]?>"></label>
+                </li>
 
-        
-        
-    
-    <footer>
+                <div class="resetsubmit">
+                    <div class="submit">
+                        <input type="submit" value="確定" name="send">
+                    </div>
+                    <div class="reset">
+                        <input type="reset" value="戻る" name="back">
+                    </div>
+                </div>
+            </form>
 
-    </footer>
+            </ul>
+    <?php } else { ?>
+        <h2>完了</h2>
+    <?php } ?>
     <script src="script.js"></script>
 </body>
 </html>
