@@ -66,6 +66,7 @@ input[type="radio"]:hover + label{
     display: flex;
     margin-left: -2.5%;
     margin-top: 5.5%;
+    font-size: 25px;
 }
 .alert-date input{
     height: 35%;
@@ -96,4 +97,8 @@ input[type="reset"]{
 input[type="reset"]:hover{
     background-color: #f55a42;
     color: #fff;
+}
+.donebtn{
+    margin-right: 10%;
+    margin-top: 45%;
 }

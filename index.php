@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
     <!-- ブートスラップ（グリッドシステムのみ）の取り込み -->
     <link rel="stylesheet" href="bootstrap-grid.css">
     <title></title>
@@ -43,7 +43,7 @@
                 </li>
 
                 <li class="alert-date">
-                    <label for="alert">お知らせ時間：<input type="datetime-local" id="alert" name="alert"></label>
+                    <label for="alert" >お知らせ時間：<input type="datetime-local" id="alert" name="alert"></label>
                 </li>
 
                 <div class="resetsubmit">
@@ -58,9 +58,9 @@
         </ul>
     <?php } else if($mode == 'confirm'){ ?>
         <ul class="form">
-            <form action="./index2.php" method="post">
+            <form action="./index.php" method="post">
                 <li class="tsk">
-                    タスク：<input type="text" name="tskname" id="tskname" class="tskname" value="<?php echo $_POST["tskname"] ?>">
+                    <span class="tskname">タスク：</span><input type="text" name="tskname" id="tskname" class="tskname" value="<?php echo $_POST["tskname"] ?>">
                 </li>
                 
                 <li class="priority-radio">                    
@@ -79,14 +79,18 @@
                         <input type="submit" value="確定" name="send">
                     </div>
                     <div class="reset">
-                        <input type="reset" value="戻る" name="back">
+                        <input type="submit" value="戻る" name="back">
                     </div>
                 </div>
             </form>
 
             </ul>
     <?php } else { ?>
-        <h2>完了</h2>
+        <ul class="form">
+            <form action="./index.php" method="post">
+            <input type="submit" value="完了！"　name="back" class="donebtn">
+            </form>
+        </ul>
     <?php } ?>
     <script src="script.js"></script>
 </body>
