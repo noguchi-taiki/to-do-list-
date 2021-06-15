@@ -1,8 +1,13 @@
 <?php
+  session_start();
   $mode = 'input';
   if(  $_POST['back'] ){
 
   } else if( isset($_POST['confirm']) && $_POST['confirm'] ){
+
+    $_SESSION["tskname"] = $_POST["tskname"];
+    $_SESSION["priority"] = $_POST["priority"];
+    $_SESSION["alert"] = $_POST["alert"];
     $mode = 'confirm';
   } else if( isset($_POST['send']) && $_POST['send'] ){
     $mode = 'send';
@@ -19,9 +24,6 @@
     <link rel="stylesheet" href="bootstrap-grid.css">
     <title></title>
 </head>
-
-
-
 <body>
     <header>
         <h1 class="logo">.todolist</h1>
@@ -71,7 +73,7 @@
                 </li>
 
                 <li class="alert-date">
-                    <label for="alert">お知らせ時間：<input type="datetime-local" id="alert" value="<?php echo $_POST["alert"]?>"></label>
+                    <label for="alert">お知らせ時間：<input type="datetime-local" id="alert" value="<?php echo $_SESSION["alert"]?>"></label>
                 </li>
 
                 <div class="resetsubmit">
@@ -87,6 +89,13 @@
             </ul>
     <?php } else { ?>
         <ul class="form">
+            <?php
+            try{
+            $dsn = "mysql:host=localhost; dbname=todolist; charset=utf8"; 
+            $user = "root";
+            $pass ="root";
+            $pdo = new PDO($dsn,$user,$pass)
+            ?>
             <form action="./index.php" method="post">
             <input type="submit" value="完了！"　name="back" class="donebtn">
             </form>
