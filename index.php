@@ -1,7 +1,7 @@
 <?php
   session_start();
   $mode = 'input';
-  if(  $_POST['back'] ){
+  if($_POST['back']){
 
   } else if( isset($_POST['confirm']) && $_POST['confirm'] ){
 
@@ -61,6 +61,7 @@
     <?php } else if($mode == 'confirm'){ ?>
         <ul class="form">
             <form action="./index.php" method="post">
+            
                 <li class="tsk">
                     <span class="tskname">タスク：</span><input type="text" name="tskname" id="tskname" class="tskname" value="<?php echo $_POST["tskname"] ?>">
                 </li>
@@ -68,7 +69,7 @@
                 <li class="priority-radio">                    
                         優先度：
                         <?php
-                        echo $_POST["priority"];
+                        echo $_SESSION["priority"];
                         ?>
                 </li>
 
@@ -89,15 +90,22 @@
             </ul>
     <?php } else { ?>
         <ul class="form">
+            <form action="./index.php" method="post">
+            <input type="submit" value="完了！"　name="back" class="donebtn">
             <?php
-            try{
             $dsn = "mysql:host=localhost; dbname=todolist; charset=utf8"; 
             $user = "root";
             $pass ="root";
-            $pdo = new PDO($dsn,$user,$pass)
+            try{
+            $pdo = new PDO($dsn,$user,$pass,);
+            $sql = "insert into tskname (tsk,priority,time) values ('うんこする','緊急','2021-02-02 10:10:10')";
+            $res = $pdo->query($sql);
+            $pdo = null;
+            } catch(PDOException $e) {
+                echo"接続失敗".$e->getMessage();
+                exit();
+            }
             ?>
-            <form action="./index.php" method="post">
-            <input type="submit" value="完了！"　name="back" class="donebtn">
             </form>
         </ul>
     <?php } ?>
