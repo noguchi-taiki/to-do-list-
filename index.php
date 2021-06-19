@@ -98,8 +98,12 @@
             $pass ="root";
             try{
             $pdo = new PDO($dsn,$user,$pass,);
-            $sql = "insert into tskname (tsk,priority,time) values ('うんこする','緊急','2021-02-02 10:10:10')";
-            $res = $pdo->query($sql);
+            $sql = "insert into tskname values (:tskname,:priority,:alert)";
+            $res = $pdo->prepare($sql);
+            $res -> bindParam(":tskname",$_SESSION["tskname"]);
+            $res -> bindParam(":priority",$_SESSION["priority"]);
+            $res -> bindParam(":alert",$_SESSION["alert"]);
+            $res -> execute();
             $pdo = null;
             } catch(PDOException $e) {
                 echo"接続失敗".$e->getMessage();
