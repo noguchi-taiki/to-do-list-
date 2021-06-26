@@ -1,7 +1,7 @@
 <?php
   session_start();
   $mode = 'input';
-  if($_POST['back']){
+  if(isset($POST["back"]) && $_POST['back']){
 
   } else if( isset($_POST['confirm']) && $_POST['confirm'] ){
 
@@ -12,6 +12,9 @@
   } else if( isset($_POST['send']) && $_POST['send'] ){
     $mode = 'send';
   }
+$dsn = "mysql:host=localhost; dbname=todolist; charset=utf8"; 
+$user = "root";
+$pass ="root";
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -31,10 +34,19 @@
     <?php if( $mode == 'input') { ?>
         <ul class="form">
             <form action="./index.php" method="post">
+            <?php 
+                    $dbh = new PDO($dsn,$user,$pass);
+                    $sql = "select tsk,priority,time from tskname oreder by case priority when '緊急' then 1 when '普通' then 2 when '不急' then 3 end";
+                    $stmt = $dbh -> prepare($sql);
+                    $stmt -> execute();
+                    $sbh  = null;
+                        while ($task = $stmt -> fetch(PDO::FETCH_ASSOC)) {
+                            var_dump($task);
+                        };
+                    ?>
                 <li class="tsk">
                     <label for="tskname" class="tskname">タスク：<input type="text" name="tskname" id="tskname" class="tskname"></label>
                 </li>
-                
                 <li class="priority-radio">                    
                         優先度：
                         <div class="radiobtn-group">
@@ -63,7 +75,7 @@
             <form action="./index.php" method="post">
             
                 <li class="tsk">
-                    <span class="tskname">タスク：</span><input type="text" name="tskname" id="tskname" class="tskname" value="<?php echo $_POST["tskname"] ?>">
+                    <span class="tskname">タスク：</span><input type="text" name="tskname" id="tskname" class="tskname" value="<?php echo $_SESSION["tskname"] ?>">
                 </li>
                 
                 <li class="priority-radio">                    
@@ -93,18 +105,16 @@
             <form action="./index.php" method="post">
             <input type="submit" value="完了！"　name="back" class="donebtn">
             <?php
-            $dsn = "mysql:host=localhost; dbname=todolist; charset=utf8"; 
-            $user = "root";
-            $pass ="root";
             try{
-            $pdo = new PDO($dsn,$user,$pass,);
+            $dbh = new PDO($dsn,$user,$pass,);
             $sql = "insert into tskname values (:tskname,:priority,:alert)";
-            $res = $pdo->prepare($sql);
+            $res = $dbh->prepare($sql);
             $res -> bindParam(":tskname",$_SESSION["tskname"]);
             $res -> bindParam(":priority",$_SESSION["priority"]);
             $res -> bindParam(":alert",$_SESSION["alert"]);
             $res -> execute();
-            $pdo = null;
+            $dbh = null;
+            $sql = null;
             } catch(PDOException $e) {
                 echo"接続失敗".$e->getMessage();
                 exit();
