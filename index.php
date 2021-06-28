@@ -24,7 +24,7 @@ $pass ="root";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <!-- ブートスラップ（グリッドシステムのみ）の取り込み -->
-    <link rel="stylesheet" href="bootstrap-grid.css">
+    <!--<link rel="stylesheet" href="bootstrap-grid.css">-->
     <title></title>
 </head>
 <body>
@@ -32,18 +32,36 @@ $pass ="root";
         <h1 class="logo">.todolist</h1>
     </header>
     <?php if( $mode == 'input') { ?>
+        <?php
+        if(isset($_post["method"])&&$_post["method"]===("put")){
+        }
+        ?>
         <ul class="form">
             <form action="./index.php" method="post">
             <?php 
                     $dbh = new PDO($dsn,$user,$pass);
-                    $sql = "select tsk,priority,time from tskname oreder by case priority when '緊急' then 1 when '普通' then 2 when '不急' then 3 end";
+                    $sql = "select tsk,priority,time from tskname ";
                     $stmt = $dbh -> prepare($sql);
                     $stmt -> execute();
-                    $sbh  = null;
-                        while ($task = $stmt -> fetch(PDO::FETCH_ASSOC)) {
-                            var_dump($task);
-                        };
+                    $sql = null; 
+                    $sbh = null;
                     ?>
+                    <li class="tskstmt">
+                        <?php while ($task = $stmt -> fetch(PDO::FETCH_ASSOC)) {?>
+                            <?php echo $task["tsk"];?>
+                            <br>
+                            <?php echo $task["priority"];?>
+                            <br>
+                            <?php echo $task["time"];?>
+                            <br>
+                            <?php echo "<form method='POST' action='index.php'>
+                            <input type='hidden' value='put' name='method'>
+                            <input type='hidden' value='".$task['tsk']."' name='tsk'>
+                            <button type='submit'>完了！</button>
+                            </form>
+                            </li>";
+                        };?>
+                    </li>
                 <li class="tsk">
                     <label for="tskname" class="tskname">タスク：<input type="text" name="tskname" id="tskname" class="tskname"></label>
                 </li>
