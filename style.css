@@ -102,8 +102,16 @@ input[type="reset"]:hover{
     margin-right: 10%;
     margin-top: 45%;
 }
-.tskstmt{
+.tskstmtbox{
+    margin-left: 80px;
+    margin-top: 40px;
+    padding:0px 10px;
     left: 0;
-    top: 20;
+    top: 0;
     position: fixed;
+    list-style: none;
+}
+.box{
+    background-color: #31A9EE;
+    border-radius: 15px;
 }

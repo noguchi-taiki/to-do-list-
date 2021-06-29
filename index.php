@@ -44,23 +44,22 @@ $pass ="root";
                     $stmt = $dbh -> prepare($sql);
                     $stmt -> execute();
                     $sql = null; 
-                    $sbh = null;
+                    $dbh = null;
                     ?>
-                    <li class="tskstmt">
+                    <li class="tskstmtbox">
                         <?php while ($task = $stmt -> fetch(PDO::FETCH_ASSOC)) {?>
-                            <?php echo $task["tsk"];?>
-                            <br>
-                            <?php echo $task["priority"];?>
-                            <br>
-                            <?php echo $task["time"];?>
-                            <br>
+                            <br><div class="box">
+                            <div class="tskstmt"><?php echo $task["tsk"];?></div>
+                            <div class="timestmt"><?php echo $task["priority"];?></div>
+                            <div class="prioritystmt"><?php echo $task["time"];?></div>
+                            <div class="btnstmt">
                             <?php echo "<form method='POST' action='index.php'>
                             <input type='hidden' value='put' name='method'>
                             <input type='hidden' value='".$task['tsk']."' name='tsk'>
-                            <button type='submit'>完了！</button>
-                            </form>
-                            </li>";
-                        };?>
+                            <button type='submit'>完了！</button><br>
+                            </form>"?>
+                            </div><br>
+                        <?php }; ?>
                     </li>
                 <li class="tsk">
                     <label for="tskname" class="tskname">タスク：<input type="text" name="tskname" id="tskname" class="tskname"></label>
