@@ -37,8 +37,7 @@ $pass ="root";
         }
         ?>
         <ul class="form">
-            <form action="./index.php" method="post">
-            <?php 
+            <?php
                     $dbh = new PDO($dsn,$user,$pass);
                     $sql = "select tsk,priority,time from tskname ";
                     $stmt = $dbh -> prepare($sql);
@@ -55,12 +54,13 @@ $pass ="root";
                             <div class="btnstmt">
                             <?php echo "<form method='POST' action='index.php'>
                             <input type='hidden' value='put' name='method'>
-                            <input type='hidden' value='".$task['tsk']."' name='tsk'>
                             <button type='submit'>完了！</button><br>
                             </form>"?>
                             </div><br>
                         <?php }; ?>
                     </li>
+
+            <form action="./index.php" method="post">
                 <li class="tsk">
                     <label for="tskname" class="tskname">タスク：<input type="text" name="tskname" id="tskname" class="tskname"></label>
                 </li>
@@ -140,6 +140,5 @@ $pass ="root";
             </form>
         </ul>
     <?php } ?>
-    <script src="script.js"></script>
 </body>
 </html>
