@@ -15,6 +15,15 @@
 $dsn = "mysql:host=localhost; dbname=todolist; charset=utf8"; 
 $user = "root";
 $pass ="root";
+if(isset($_POST["tsk"])){
+    //var_dump($_POST["tsk"]);
+    $dbh = new PDO($dsn,$user,$pass);
+    $sql = "delete from tskname where tsk = :tskdate";
+    $stmt = $dbh -> prepare($sql);
+    $stmt -> bindParam(":tskdate",$_POST["tsk"]);
+    $stmt -> execute();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -34,7 +43,7 @@ $pass ="root";
     <?php if( $mode == 'input') { ?>
         <?php
         if(isset($_post["method"])&&$_post["method"]===("put")){
-        }
+        }//意味のわからないコード（要確認）
         ?>
         <ul class="form">
             <?php
@@ -53,9 +62,11 @@ $pass ="root";
                             <div class="prioritystmt"><?php echo $task["time"];?></div>
                             <div class="btnstmt">
                             <?php echo "<form method='POST' action='index.php'>
-                            <input type='hidden' value='put' name='method'>
+                            <input type='hidden' value='delete' name='method'>
+                            <input type='hidden' value='".$task["tsk"]."' name='tsk'>
                             <button type='submit'>完了！</button><br>
-                            </form>"?>
+                            </form>";
+                            ?>
                             </div><br>
                         <?php }; ?>
                     </li>
@@ -125,7 +136,7 @@ $pass ="root";
             try{
             $dbh = new PDO($dsn,$user,$pass,);
             $sql = "insert into tskname values (:tskname,:priority,:alert)";
-            $res = $dbh->prepare($sql);
+            $res = $dbh -> prepare($sql);
             $res -> bindParam(":tskname",$_SESSION["tskname"]);
             $res -> bindParam(":priority",$_SESSION["priority"]);
             $res -> bindParam(":alert",$_SESSION["alert"]);
