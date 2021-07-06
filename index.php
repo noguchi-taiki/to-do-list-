@@ -41,10 +41,7 @@ if(isset($_POST["tsk"])){
         <h1 class="logo">.todolist</h1>
     </header>
     <?php if( $mode == 'input') { ?>
-        <?php
-        if(isset($_post["method"])&&$_post["method"]===("put")){
-        }//意味のわからないコード（要確認）
-        ?>
+        
         <ul class="form">
             <?php
                     $dbh = new PDO($dsn,$user,$pass);

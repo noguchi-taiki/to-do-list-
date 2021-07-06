@@ -108,7 +108,9 @@ input[type="reset"]:hover{
     padding:0px 10px;
     left: 0;
     top: 0;
+    bottom: 0;
     position: fixed;
+    overflow-y: auto;
     list-style: none;
 }
 .box{
