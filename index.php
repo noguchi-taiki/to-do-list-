@@ -121,6 +121,7 @@ if(isset($_POST["tsk"])){
                     <div class="reset">
                         <input type="submit" value="戻る" name="back">
                     </div>
+                    
                 </div>
             </form>
 

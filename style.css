@@ -36,7 +36,7 @@ input{
     border-radius: 10%;
     margin-top: 12.5%;
 }
-.tskname{
+.tskname,.user,.pas{
     height: 25px;
     font-size: 25px;
 }
@@ -116,4 +116,12 @@ input[type="reset"]:hover{
 .box{
     background-color: #31A9EE;
     border-radius: 15px;
+}
+
+/* サインアップ用↓ */
+.user,.pas{
+    margin-top: 20%;
+}
+.pas{
+    margin-right: 8.5%;
 }
