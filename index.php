@@ -12,11 +12,12 @@
   } else if( isset($_POST['send']) && $_POST['send'] ){
     $mode = 'send';
   }
+
 $dsn = "mysql:host=localhost; dbname=todolist; charset=utf8"; 
 $user = "root";
 $pass ="root";
+
 if(isset($_POST["tsk"])){
-    //var_dump($_POST["tsk"]);
     $dbh = new PDO($dsn,$user,$pass);
     $sql = "delete from tskname where tsk = :tskdate";
     $stmt = $dbh -> prepare($sql);
@@ -32,16 +33,16 @@ if(isset($_POST["tsk"])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <!-- ブートスラップ（グリッドシステムのみ）の取り込み -->
-    <!--<link rel="stylesheet" href="bootstrap-grid.css">-->
-    <title></title>
+    <title>main</title>
 </head>
 <body>
     <header>
         <h1 class="logo">.todolist</h1>
     </header>
     <?php if( $mode == 'input') { ?>
-        
+        <?php
+            echo($_POST["username"]);
+            ?>
         <ul class="form">
             <?php
                     $dbh = new PDO($dsn,$user,$pass);
@@ -85,14 +86,14 @@ if(isset($_POST["tsk"])){
                     <label for="alert" >お知らせ時間：<input type="datetime-local" id="alert" name="alert"></label>
                 </li>
 
-                <div class="resetsubmit">
+                <li class="btns">
                     <div class="submit">
                         <input type="submit" value="リストに保存する" name="confirm">
                     </div>
                     <div class="reset">
                         <input type="reset" value="リセット">
                     </div>
-                </div>
+                </li>
             </form>
         </ul>
     <?php } else if($mode == 'confirm'){ ?>
@@ -114,7 +115,7 @@ if(isset($_POST["tsk"])){
                     <label for="alert">お知らせ時間：<input type="datetime-local" id="alert" value="<?php echo $_SESSION["alert"]?>"></label>
                 </li>
 
-                <div class="resetsubmit">
+                <div class="btns">
                     <div class="submit">
                         <input type="submit" value="確定" name="send">
                     </div>
