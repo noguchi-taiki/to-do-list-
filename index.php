@@ -46,10 +46,9 @@ if(isset($_POST["tsk"])){
         <ul class="form">
             <?php
                     $dbh = new PDO($dsn,$user,$pass);
-                    $sql = "select tsk,priority,time from tskname ";
-                    $stmt = $dbh -> prepare($sql);
-                    $stmt -> execute();
-                    $sql = null; 
+                    $sql = "select tsk,priority,time from tskname";
+                    $stmt = $dbh -> query($sql);
+                    $sql = null;
                     $dbh = null;
                     ?>
                     <li class="tskstmtbox">
