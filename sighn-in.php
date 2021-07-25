@@ -19,7 +19,8 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
         $stmt -> execute();
         if($dbrows = $stmt -> fetch()){
             if($dbrows["pasword"] == $_POST["pas"]){
-                echo("ログイン成功");
+                echo($dbrow);
+                header("Location: index.php") ;
             } else {
                 echo("ログイン失敗");
             }
