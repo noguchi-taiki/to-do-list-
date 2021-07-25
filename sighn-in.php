@@ -13,21 +13,19 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
         var_dump($dbh->errorCode());
         var_dump($dbh->errorInfo());
         */
-        $sql = ("delete from user where username=('太貴')");
-        // $stmt -> prepare($sql);
-        // $stmt -> bindParam(":user",$_POST["user"]);
-        // $stmt -> execute();
-        $stmt = $dbh -> query($sql);
-        exit();
-        // if($dbrows = $stmt->fetch()){
-        //     if($dbrows["pas"] == $_POST["pas"]){
-        //         echo("ログイン成功");
-        //     } else {
-        //         echo("ログイン失敗");
-        //     }
-        // } else {
-        //     echo("ログイン失敗");
-        // }
+        $sql = ("select * from user where username=:user");
+        $stmt = $dbh -> prepare($sql);
+        $stmt -> bindParam(":user",$_POST["user"]);
+        $stmt -> execute();
+        if($dbrows = $stmt -> fetch()){
+            if($dbrows["pasword"] == $_POST["pas"]){
+                echo("ログイン成功");
+            } else {
+                echo("ログイン失敗");
+            }
+        } else {
+            echo("ログイン大失敗");
+        }
     } catch(PDOException $e) {
         echo"接続失敗".$e->getMessage();
         exit();
