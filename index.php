@@ -134,11 +134,11 @@ if(isset($_POST["tsk"])){
             try{
             $dbh = new PDO($dsn,$user,$pass,);
             $sql = "insert into tskname values (:tskname,:priority,:alert)";
-            $res = $dbh -> prepare($sql);
-            $res -> bindParam(":tskname",$_SESSION["tskname"]);
-            $res -> bindParam(":priority",$_SESSION["priority"]);
-            $res -> bindParam(":alert",$_SESSION["alert"]);
-            $res -> execute();
+            $stmt = $dbh -> prepare($sql);
+            $stmt -> bindParam(":tskname",$_SESSION["tskname"]);
+            $stmt -> bindParam(":priority",$_SESSION["priority"]);
+            $stmt -> bindParam(":alert",$_SESSION["alert"]);
+            $stmt -> execute();
             $dbh = null;
             $sql = null;
             } catch(PDOException $e) {
