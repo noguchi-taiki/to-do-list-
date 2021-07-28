@@ -36,7 +36,7 @@ input{
     border-radius: 10%;
     margin-top: 12.5%;
 }
-.tskname,.username,.pasname{
+.tskname,.username,.pasname,.mail{
     height: 25px;
     font-size: 25px;
 }

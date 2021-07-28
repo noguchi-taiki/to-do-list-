@@ -3,9 +3,10 @@
 $mode = "certification";
 if(isset($_POST["certification"]) && $_POST["certification"]){
     $mode = "certification";
-    echo ("うんこぶりぶり");
 } elseif (isset($_POST["new"]) && $_POST["new"]){
     $mode = "new";
+} else{
+    $mdoe = "before";
 }
  session_start();
  $dbn = "mysql:host=localhost; dbname=todolist; charset=utf8";
@@ -22,7 +23,7 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
     <link rel="stylesheet" href="style.css">
     <title>signpup</title>
 </head>
-<?php if($mode = "certification"){ ?>
+<?php if($mode == "certification"){ ?>
     <body>
     <header>
         <h1 class="logo">.todolist</h1>
@@ -31,11 +32,15 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
         <form action="sighn-in.php" method="post">
             <li class="user">  
                 <label for="username" class="username">ユーザー名：</label>
-                <input type="text" name="user" id="username" class="username">             
+                <input type="text" name="user" id="username" class="username" placeholder="someone">         
+            </li>
+            <li class="email">
+                <label for="mail" class="mail">アドレス　：</label>
+                <input type="text" name="mail" id="mail" class="mail" placeholder="info@example.com">
             </li>
             <li class="pas">
                 <label for="pasname" class="pasname">パスワード：</label>
-                <input type="password" name="pas" id="pasname" class="pasname"  style="ime-mode:disabled;">
+                <input type="text" name="pas" id="pasname" class="pasname"  style="ime-mode:disabled;" placeholder="※半角英数字">
             </li>       
 <?php
 if(isset($_POST["certification"]) && $_POST["certification"]){
@@ -46,9 +51,10 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
         var_dump($dbh->errorCode());
         var_dump($dbh->errorInfo());
         */
-        $sql = ("select * from user where username=:user");
+        $sql = ("select * from user where username=:user && mail=:mail ");
         $stmt = $dbh -> prepare($sql);
         $stmt -> bindParam(":user",$_POST["user"]);
+        $stmt -> bindParam(":mail",$_POST["mail"]);
         $stmt -> execute();
         if($dbrows = $stmt -> fetch()){
             if($dbrows["pasword"] == $_POST["pas"]){
@@ -58,7 +64,7 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
                 echo("※パスワードが違います。");
             }
         } else {
-            echo("※ユーザ名が違います。");
+            echo("※ユーザ名又はアドレスが違います。");
         }
     } catch(PDOException $e) {
         echo"接続失敗".$e->getMessage();
@@ -68,7 +74,7 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
 ?>
             <li class="btns">
                 <div class="submit">
-                    <input type="submit" value="認証" name="new">
+                    <input type="submit" value="認証" name="certification">
                 </div>
                 <div class="submit">
                     <input type="submit" value="新規登録" name="new">
@@ -77,20 +83,27 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
         </form>
     </ul>
 </body>
-<?php } elseif($mode = "new") { ?>
+<?php } elseif($mode == "new") { ?>
+    <header>
+        <h1 class="logo">.todolist</h1>
+    </header>
     <ul class="form">
         <form action="sighn-in.php" method="post">
             <li class="user">  
                 <label for="username" class="username">ユーザー名：</label>
-                <input type="text" name="user" id="username" class="username">             
+                <input type="text" name="user" id="username" class="username" placeholder="someone">
+            </li>
+            <li class="email">
+                <label for="mail" class="mail">アドレス　：</label>
+                <input type="text" name="mail" id="mail" class="mail" placeholder="info@example.com">
             </li>
             <li class="pas">
                 <label for="pasname" class="pasname">パスワード：</label>
-                <input type="password" name="pas" id="pasname" class="pasname"  style="ime-mode:disabled;">
+                <input type="password" name="pas" id="pasname" class="pasname" placeholder="※半角英数字">
             </li>       
             <li class="btns">
                 <div class="submit">
-                    <input type="submit" value="作成" name="mike">
+                    <input type="submit" value="作成" name="new">
                 </div>
                 <div class="reset">
                     <input type="reset" value="リセット">
