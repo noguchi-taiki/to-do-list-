@@ -1,5 +1,8 @@
 <?php
+
+
   session_start();
+  
   $mode = 'input';
   if(isset($POST["back"]) && $_POST['back']){
 
@@ -19,10 +22,12 @@ $pass ="root";
 
 if(isset($_POST["tsk"])){
     $dbh = new PDO($dsn,$user,$pass);
-    $sql = "delete from tskname where tsk = :tskdate";
+    $sql = "delete from $_SESSION[user] where tsk = :tskdate";
     $stmt = $dbh -> prepare($sql);
     $stmt -> bindParam(":tskdate",$_POST["tsk"]);
     $stmt -> execute();
+    $sql = null;
+    $dbh = null; 
 }
 
 ?>
@@ -37,17 +42,15 @@ if(isset($_POST["tsk"])){
 </head>
 <body>
     <header>
-        <h1 class="logo">.todolist</h1>
+        <h1 class="logo"><?php echo $_SESSION["user"];?>.todolist</h1>
     </header>
     <?php if( $mode == 'input') { ?>
-        <?php
-            echo($_POST["username"]);
-            ?>
         <ul class="form">
             <?php
                     $dbh = new PDO($dsn,$user,$pass);
-                    $sql = "select tsk,priority,time from tskname";
-                    $stmt = $dbh -> query($sql);
+                    $sql = "select * from ".$_SESSION["user"];
+                    $stmt = $dbh -> prepare($sql);
+                    $stmt -> execute();
                     $sql = null;
                     $dbh = null;
                     ?>
@@ -58,12 +61,13 @@ if(isset($_POST["tsk"])){
                             <div class="timestmt"><?php echo $task["priority"];?></div>
                             <div class="prioritystmt"><?php echo $task["time"];?></div>
                             <div class="btnstmt">
-                            <?php echo "<form method='POST' action='index.php'>
-                            <input type='hidden' value='delete' name='method'>
-                            <input type='hidden' value='".$task["tsk"]."' name='tsk'>
-                            <button type='submit'>完了！</button><br>
-                            </form>";
-                            ?>
+                            <?php echo "
+                            <form method='POST' action='index.php'>
+                                <input type='hidden' value='delete' name='method'>
+                                <input type='hidden' value='".$task["tsk"]."' name='tsk'>
+                                <button type='submit'>完了！</button><br>
+                            </form>
+                            ";?>
                             </div><br>
                         <?php }; ?>
                     </li>
@@ -72,7 +76,7 @@ if(isset($_POST["tsk"])){
                 <li class="tsk">
                     <label for="tskname" class="tskname">タスク：<input type="text" name="tskname" id="tskname" class="tskname"></label>
                 </li>
-                <li class="priority-radio">                    
+                <li class="priority-radio">                   
                         優先度：
                         <div class="radiobtn-group">
                             <input id="priority1" type="radio" name="priority" value="緊急"><label class="radiobtn" for="priority1">緊急</label>
@@ -95,7 +99,8 @@ if(isset($_POST["tsk"])){
                 </li>
             </form>
         </ul>
-    <?php } else if($mode == 'confirm'){ ?>
+    <?php } else if($mode == 'confirm'){?>
+        
         <ul class="form">
             <form action="./index.php" method="post">
             
@@ -129,11 +134,11 @@ if(isset($_POST["tsk"])){
     <?php } else { ?>
         <ul class="form">
             <form action="./index.php" method="post">
-            <input type="submit" value="完了！"　name="back" class="donebtn">
+            <input type="submit" value="完了！" name="back" class="donebtn">
             <?php
             try{
             $dbh = new PDO($dsn,$user,$pass,);
-            $sql = "insert into tskname values (:tskname,:priority,:alert)";
+            $sql = "insert into $_SESSION[user] values (:tskname,:priority,:alert)";
             $stmt = $dbh -> prepare($sql);
             $stmt -> bindParam(":tskname",$_SESSION["tskname"]);
             $stmt -> bindParam(":priority",$_SESSION["priority"]);
