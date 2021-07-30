@@ -42,7 +42,7 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
             </li>
             <li class="email">
                 <label for="mail" class="mail">アドレス　：</label>
-                <input type="email" name="mail" id="mail" class="mail" placeholder="info@example.com">
+                <input type="text" name="mail" id="mail" class="mail" placeholder="info@example.com">
             </li>
             <li class="pas">
                 <label for="pasname" class="pasname">パスワード：</label>
@@ -60,8 +60,7 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
         <?php
     if(isset($_POST["newuser"])){
         $dbh = new PDO($dbn,$dbu,$dbp);
-        $user = $_SESSION["newuser"];
-        $sql1 = "create table todolist.".$user."(tsk varchar(10),piriority varchar(2),time datetime)";
+        $sql1 = "create table todolist.$_SESSION[newuser] (tsk varchar(10),piriority varchar(2),time datetime)";
         $stmt1 = $dbh -> prepare($sql1);
         $stmt1 -> execute();
 
@@ -112,7 +111,7 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
         <form action="sighn-in.php" method="post">
             <li class="user">
                 <label for="username" class="username">ユーザー名：</label>
-                <input type="text" name="newuser" id="username" class="username" placeholder="someone" value=<?php echo $_SESSION["user"] ?>>
+                <input type="text" name="newuser" id="username" class="username" placeholder="someone" value=<?php echo $_SESSION["user"] ?> >
             </li>
             <li class="email">
                 <label for="mail" class="mail">アドレス　：</label>

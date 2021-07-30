@@ -44,11 +44,11 @@ if(isset($_POST["tsk"])){
     <header>
         <h1 class="logo"><?php echo $_SESSION["user"];?>.todolist</h1>
     </header>
-    <?php if( $mode == 'input') { ?>
+    <?php if( $mode == 'input') { ;?>
         <ul class="form">
             <?php
                     $dbh = new PDO($dsn,$user,$pass);
-                    $sql = "select * from ".$_SESSION["user"];
+                    $sql = "select * from $_SESSION[user]";
                     $stmt = $dbh -> prepare($sql);
                     $stmt -> execute();
                     $sql = null;
@@ -63,8 +63,8 @@ if(isset($_POST["tsk"])){
                             <div class="btnstmt">
                             <?php echo "
                             <form method='POST' action='index.php'>
-                                <input type='hidden' value='delete' name='method'>
-                                <input type='hidden' value='".$task["tsk"]."' name='tsk'>
+                                <input type='hidden' value='delete' name='method' required>
+                                <input type='hidden' value='".$task["tsk"]."' name='tsk' required>
                                 <button type='submit'>完了！</button><br>
                             </form>
                             ";?>
@@ -74,7 +74,7 @@ if(isset($_POST["tsk"])){
 
             <form action="./index.php" method="post">
                 <li class="tsk">
-                    <label for="tskname" class="tskname">タスク：<input type="text" name="tskname" id="tskname" class="tskname"></label>
+                    <label for="tskname" class="tskname">タスク：<input type="text" name="tskname" id="tskname" class="tskname" required></label>
                 </li>
                 <li class="priority-radio">                   
                         優先度：
@@ -86,7 +86,7 @@ if(isset($_POST["tsk"])){
                 </li>
 
                 <li class="alert-date">
-                    <label for="alert" >お知らせ時間：<input type="datetime-local" id="alert" name="alert"></label>
+                    <label for="alert" >お知らせ時間：<input type="datetime-local" id="alert" name="alert" required></label>
                 </li>
 
                 <li class="btns">
@@ -105,7 +105,7 @@ if(isset($_POST["tsk"])){
             <form action="./index.php" method="post">
             
                 <li class="tsk">
-                    <span class="tskname">タスク：</span><input type="text" name="tskname" id="tskname" class="tskname" value="<?php echo $_SESSION["tskname"] ?>">
+                    <span class="tskname">タスク：</span><input type="text" name="tskname" id="tskname" class="tskname" value="<?php echo $_SESSION["tskname"] ?>" required>
                 </li>
                 
                 <li class="priority-radio">                    
@@ -116,7 +116,7 @@ if(isset($_POST["tsk"])){
                 </li>
 
                 <li class="alert-date">
-                    <label for="alert">お知らせ時間：<input type="datetime-local" id="alert" value="<?php echo $_SESSION["alert"]?>"></label>
+                    <label for="alert">お知らせ時間：<input type="datetime-local" id="alert" value="<?php echo $_SESSION["alert"]?>" required></label>
                 </li>
 
                 <div class="btns">
