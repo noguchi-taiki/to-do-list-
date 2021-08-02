@@ -1,8 +1,10 @@
 <?php
 
-
   session_start();
-  
+  if(isset($_GET["user"])){
+    $_SESSION["user"] = $_GET["user"];
+  }
+
   $mode = 'input';
   if(isset($POST["back"]) && $_POST['back']){
 
@@ -42,7 +44,7 @@ if(isset($_POST["tsk"])){
 </head>
 <body>
     <header>
-        <h1 class="logo"><?php echo $_SESSION["user"];?>.todolist</h1>
+        <h1 class="logo"><?php echo($_SESSION["user"]); ?>.todolist</h1>
     </header>
     <?php if( $mode == 'input') { ;?>
         <ul class="form">
@@ -69,7 +71,10 @@ if(isset($_POST["tsk"])){
                             </form>
                             ";?>
                             </div><br>
-                        <?php }; ?>
+                        <?php }
+
+                        if($tsk["time"])
+                        ?>
                     </li>
 
             <form action="./index.php" method="post">

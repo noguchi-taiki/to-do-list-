@@ -88,7 +88,8 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
         $stmt -> execute();
         if($dbrows = $stmt -> fetch()){
             if($dbrows["pasword"] == $_POST["pas"]){
-                header("Location: index.php");
+                $user = $_SESSION["user"];
+                header("Location: index.php?user=$user ");
             } else {
                 echo("※パスワードが違います。");
             }
