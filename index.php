@@ -3,8 +3,8 @@
   session_start();
   if(isset($_GET["user"])){
     $_SESSION["user"] = $_GET["user"];
+    $_SESSION["mail"] = $_GET["mail"];
   }
-
   $mode = 'input';
   if(isset($POST["back"]) && $_POST['back']){
 
@@ -69,14 +69,15 @@ if(isset($_POST["tsk"])){
                                 <input type='hidden' value='".$task["tsk"]."' name='tsk' required>
                                 <button type='submit'>完了！</button><br>
                             </form>
-                            ";?>
+                            ";                            
+                            ?>
+                            
                             </div><br>
-                        <?php }
-
-                        if($tsk["time"])
-                        ?>
+                        <?php } ?>
                     </li>
-
+<?php
+mb_send_mail("taiki.13n1015@gmail.com",$tsk["priority"],$tsk["tskname"]."の時間になりました",);
+?>
             <form action="./index.php" method="post">
                 <li class="tsk">
                     <label for="tskname" class="tskname">タスク：<input type="text" name="tskname" id="tskname" class="tskname" required></label>
