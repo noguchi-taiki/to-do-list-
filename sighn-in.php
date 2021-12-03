@@ -12,7 +12,7 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
 } elseif (isset($_POST["new"]) && $_POST["new"]){
     $mode = "new";
 } else{
-    $mdoe = "before";
+    ;
 }
  $dbn = "mysql:host=localhost; dbname=todolist; charset=utf8";
  $dbu = "root";
@@ -35,7 +35,7 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
         <h1 class="logo">.todolist</h1>
     </header>
     <ul class="form">
-        <form action="sighn-in.php" method="post">
+        <form action="sighn-in.php" method="post" autocomplete="off">
             <li class="user">  
                 <label for="username" class="username">ユーザー名：</label>
                 <input type="text" name="user" id="username" class="username" placeholder="someone">         
@@ -110,7 +110,7 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
         <h1 class="logo">.todolist</h1>
     </header>
     <ul class="form">
-        <form action="sighn-in.php" method="post">
+        <form action="sighn-in.php" method="post" autocomplete="off">
             <li class="user">
                 <label for="username" class="username">ユーザー名：</label>
                 <input type="text" name="newuser" id="username" class="username" placeholder="someone" value=<?php echo $_SESSION["user"] ?> >
