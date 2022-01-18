@@ -81,7 +81,6 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
         var_dump($dbh->errorInfo());
         */
         $sql = ("select * from user where username=:user && mail=:mail ");
-        echo($_SESSION["user"]);
         $stmt = $dbh -> prepare($sql);
         $stmt -> bindParam(":user",$_SESSION["user"]);
         $stmt -> bindParam(":mail",$_POST["mail"]);

@@ -77,9 +77,6 @@ if(isset($_POST["tsk"])){
                             </div><br>
                         <?php } ?>
                     </li>
-<?php
-mb_send_mail("taiki.13n1015@gmail.com",$tsk["priority"],$tsk["tskname"]."の時間になりました",);
-?>
             <form action="./index.php" method="post" autocomplete="off">
                 <li class="tsk">
                     <label for="tskname" class="tskname">タスク：<input type="text" name="tskname" id="tskname" class="tskname" required></label>
