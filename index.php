@@ -4,7 +4,8 @@
     $_POST["user"] = $_SESSION["user"];
     $_POST["mail"] = $_SESSION["mail"];
   } else {
-      header('Location: sighn-in.php');
+      header("location: sighn-in.php");
+>>>>>>> origin/master
   }
   $mode = 'input';
   if(isset($POST["back"]) && $_POST['back']){
@@ -64,7 +65,7 @@ if(isset($_POST["tsk"])){
                             <div class="prioritystmt"><?php echo $task["priority"];?></div>
                             <div class="btnstmt">
                             <?php echo "
-                            <form method='POST' action='index.php'>
+                            <form method='POST' action='index.php' autocomplete='off'>
                                 <input type='hidden' value='delete' name='method' required>
                                 <input type='hidden' value='".$task["tsk"]."' name='tsk' required>
                                 <button type='submit'>完了！</button><br>
@@ -75,10 +76,9 @@ if(isset($_POST["tsk"])){
                             </div><br>
                         <?php } ?>
                     </li>
-<?php
-// mb_send_mail("taiki.13n1015@gmail.com",$tsk["priority"],$tsk["tskname"]."の時間になりました",);
-?>
-            <form action="./index.php" method="post">
+
+
+            <form action="./index.php" method="post" autocomplete="off">
                 <li class="tsk">
                     <label for="tskname" class="tskname">タスク：<input type="text" name="tskname" id="tskname" class="tskname" autocomplete="off" required></label>
                 </li>
@@ -105,10 +105,10 @@ if(isset($_POST["tsk"])){
                 </li>
             </form>
         </ul>
-    <?php } else if($mode == 'confirm'){?>
+    <?php } else if($mode == 'confirm'){ ?>
         
         <ul class="form">
-            <form action="./index.php" method="post">
+            <form action="./index.php" method="post" autocomplete="off">
             
                 <li class="tsk">
                     <span class="tskname">タスク：</span><input type="text" name="tskname" id="tskname" class="tskname" value="<?php echo $_SESSION["tskname"] ?>" required>
@@ -139,7 +139,7 @@ if(isset($_POST["tsk"])){
             </ul>
     <?php } else { ?>
         <ul class="form">
-            <form action="./index.php" method="post">
+            <form action="./index.php" method="post" autocomplete="off">
             <input type="submit" value="完了！" name="back" class="donebtn">
             <?php
             try{

@@ -12,7 +12,7 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
 } elseif (isset($_POST["new"]) && $_POST["new"]){
     $mode = "new";
 } else{
-    $mdoe = "before";
+    ;
 }
  $dbn = "mysql:host=localhost; dbname=todolist; charset=utf8";
  $dbu = "root";
@@ -35,7 +35,7 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
         <h1 class="logo">.todolist</h1>
     </header>
     <ul class="form">
-        <form action="sighn-in.php" method="post">
+        <form action="sighn-in.php" method="post" autocomplete="off">
             <li class="user">  
                 <label for="username" class="username">ユーザー名：</label>
                 <input type="text" name="user" id="username" class="username" autocomplete="off" placeholder="someone">         
@@ -81,7 +81,6 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
         var_dump($dbh->errorInfo());
         */
         $sql = ("select * from user where username=:user && mail=:mail ");
-        echo($_SESSION["user"]);
         $stmt = $dbh -> prepare($sql);
         $stmt -> bindParam(":user",$_SESSION["user"]);
         $stmt -> bindParam(":mail",$_POST["mail"]);
@@ -110,7 +109,7 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
         <h1 class="logo">.todolist</h1>
     </header>
     <ul class="form">
-        <form action="sighn-in.php" method="post">
+        <form action="sighn-in.php" method="post" autocomplete="off">
             <li class="user">
                 <label for="username" class="username">ユーザー名：</label>
                 <input type="text" name="newuser" id="username" class="username" placeholder="someone" value=<?php echo $_SESSION["user"] ?> >
