@@ -1,15 +1,15 @@
 <?php
-
   session_start();
-  if(isset($_GET["user"])){
-    $_SESSION["user"] = $_GET["user"];
-    $_SESSION["mail"] = $_GET["mail"];
+  if(isset($_SESSION["user"])){
+    $_POST["user"] = $_SESSION["user"];
+    $_POST["mail"] = $_SESSION["mail"];
+  } else {
+      header('Location: sighn-in.php');
   }
   $mode = 'input';
   if(isset($POST["back"]) && $_POST['back']){
 
-  } else if( isset($_POST['confirm']) && $_POST['confirm'] ){
-
+  } else if(isset($_POST['confirm']) && $_POST['confirm']){
     $_SESSION["tskname"] = $_POST["tskname"];
     $_SESSION["priority"] = $_POST["priority"];
     $_SESSION["alert"] = $_POST["alert"];
@@ -18,8 +18,8 @@
     $mode = 'send';
   }
 
-$dsn = "mysql:host=localhost; dbname=todolist; charset=utf8"; 
-$user = "root";
+$dsn  ="mysql:host=localhost; dbname=todolist; charset=utf8"; 
+$user ="root";
 $pass ="root";
 
 if(isset($_POST["tsk"])){
@@ -60,8 +60,8 @@ if(isset($_POST["tsk"])){
                         <?php while ($task = $stmt -> fetch(PDO::FETCH_ASSOC)) {?>
                             <br><div class="box">
                             <div class="tskstmt"><?php echo $task["tsk"];?></div>
-                            <div class="timestmt"><?php echo $task["priority"];?></div>
-                            <div class="prioritystmt"><?php echo $task["time"];?></div>
+                            <div class="timestmt"><?php echo $task["time"];?></div>
+                            <div class="prioritystmt"><?php echo $task["priority"];?></div>
                             <div class="btnstmt">
                             <?php echo "
                             <form method='POST' action='index.php'>
@@ -76,11 +76,11 @@ if(isset($_POST["tsk"])){
                         <?php } ?>
                     </li>
 <?php
-mb_send_mail("taiki.13n1015@gmail.com",$tsk["priority"],$tsk["tskname"]."の時間になりました",);
+// mb_send_mail("taiki.13n1015@gmail.com",$tsk["priority"],$tsk["tskname"]."の時間になりました",);
 ?>
             <form action="./index.php" method="post">
                 <li class="tsk">
-                    <label for="tskname" class="tskname">タスク：<input type="text" name="tskname" id="tskname" class="tskname" required></label>
+                    <label for="tskname" class="tskname">タスク：<input type="text" name="tskname" id="tskname" class="tskname" autocomplete="off" required></label>
                 </li>
                 <li class="priority-radio">                   
                         優先度：

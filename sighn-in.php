@@ -38,15 +38,15 @@ if(isset($_POST["certification"]) && $_POST["certification"]){
         <form action="sighn-in.php" method="post">
             <li class="user">  
                 <label for="username" class="username">ユーザー名：</label>
-                <input type="text" name="user" id="username" class="username" placeholder="someone">         
+                <input type="text" name="user" id="username" class="username" autocomplete="off" placeholder="someone">         
             </li>
             <li class="email">
                 <label for="mail" class="mail">アドレス　：</label>
-                <input type="text" name="mail" id="mail" class="mail" placeholder="info@example.com">
+                <input type="text" name="mail" id="mail" class="mail" autocomplete="off" placeholder="info@example.com">
             </li>
             <li class="pas">
                 <label for="pasname" class="pasname">パスワード：</label>
-                <input type="password" name="pas" id="pasname" class="pasname" placeholder="目玉で見れるようにする">
+                <input type="password" name="pas" id="pasname" class="pasname" autocomplete="off" placeholder="目玉で見れるようにする">
             </li>
             <li class="btns">
                 <div class="submit">
